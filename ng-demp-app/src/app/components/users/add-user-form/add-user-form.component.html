@@ -1,0 +1,67 @@
+<form [formGroup]="eventForm" novalidate (ngSubmit)="onSubmit($event)"  autocomplete="off" class="example-form">
+
+  <table class="example-full-width" cellspacing="0"><tr>
+    <td>
+      <mat-form-field class="example-full-width" appearance="fill" >
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name">
+      <mat-error *ngIf="eventForm.controls.name.touched && eventForm.controls.name.invalid">
+        <span *ngIf="eventForm.controls.name.errors">Invalid Title (2 to 80 Characters)</span>
+      </mat-error>
+      </mat-form-field>
+    </td>
+
+    <td>
+      <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput  formControlName="email" required>
+
+      <mat-error *ngIf="eventForm.controls.email.touched && eventForm.controls.email.invalid">
+        <span >Invalid Email</span>
+      </mat-error>
+    </mat-form-field>
+  </td>
+  </tr>
+</table>
+
+  <p>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea matInput placeholder="" #description formControlName="description"></textarea>
+      <mat-hint >{{description.value.length}}/200</mat-hint>
+    </mat-form-field>
+  </p>
+
+  <table class="example-full-width" cellspacing="0"><tr>
+    <td>
+      <div class="col-3 text-left">
+        <mat-form-field appearance="fill">
+          <mat-label>Page Type</mat-label>
+          <mat-select   [formControl]="appCategory">
+            <mat-option>Please Select</mat-option>
+            <mat-option *ngFor="let option of appTypes"  [value]="option.value" >
+                {{option.viewValue}}
+             </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </td>
+  </tr>
+</table>
+
+<mat-form-field class="example-full-width" appearance="fill" >
+  <mat-label>Signature</mat-label>
+  <input matInput value="" [disabled]="eventForm.invalid" #signature>
+</mat-form-field>
+
+
+<mat-divider class="mt-5"></mat-divider>
+
+  <div class="mt-5">
+        <button mat-raised-button color="primary"
+
+          [disabled]="signature.value.length < 3"
+          type="submit">Submit </button>
+  </div>
+
+</form>

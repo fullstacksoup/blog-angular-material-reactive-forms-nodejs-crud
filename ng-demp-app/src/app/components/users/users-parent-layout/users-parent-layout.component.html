@@ -1,0 +1,12 @@
+<div class="grid-container">
+    <mat-grid-list cols="12" rowHeight="100px">
+        <mat-grid-tile [colspan]="6" [rowspan]="6">
+            <app-edit-user-form [tableData]="tableData" (saveChangeToRecord)="onSaveChangeToRecord($event)" *ngIf="toggleShowEditForm"></app-edit-user-form>
+            <app-add-user-form (addNewRecord)="onAddNewRecord($event)" *ngIf="!toggleShowEditForm"></app-add-user-form>
+        </mat-grid-tile>
+
+        <mat-grid-tile [colspan]="6" [rowspan]="6">
+            <app-users-table class="table" [tableData]="tableData" (editRecord)="onEditRecord($event)" *ngIf="isDataLoaded"></app-users-table>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>
